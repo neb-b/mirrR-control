@@ -68,7 +68,6 @@ class Setup extends Component {
 
   render() {
     const { connection, loading } = this.props
-    console.log("render", this.props)
     return (
       <View style={styles.container}>
         {
@@ -88,14 +87,14 @@ const styles = StyleSheet.create({
   container: {
     height,
     width,
-    backgroundColor: '#2067F3',
+    backgroundColor: '#3273f4',
     padding: 50,
     paddingTop: 100
   },
   heading: {
     fontSize: 36,
     fontWeight: '900',
-    color: '#95fa2f'
+    color: '#fff'
   },
   inputWrapper: {
     borderBottomWidth: 1,
@@ -121,7 +120,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     fontSize: 20,
     fontWeight: '800',
-    color: '#fa2f2f'
+    color: '#FFB11E'
   },
   connectionMsg: {
     paddingTop: 100
