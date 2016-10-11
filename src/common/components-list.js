@@ -4,7 +4,8 @@ import {
   View,
   Text,
   ScrollView,
-  Switch
+  Switch,
+  TouchableHighlight
 } from 'react-native'
 import Dimensions from 'Dimensions'
 
@@ -16,13 +17,18 @@ class ComponentsList extends Component {
   _renderRow(component) {
     const { name, active } = component
     return (
-      <View key={name} style={styles.row}>
-          <Text style={styles.text}>{name}</Text>
-          <Switch style={styles.switch}
-          value={active}
-          onChange={() => this.props.toggleComponent(component)}
-          />
-      </View>
+      <TouchableHighlight
+        key={name}
+        underlayColor="#e2e2e2"
+        onPress={() => this.props.toggleComponent(component)}>
+        <View style={styles.row}>
+            <Text style={styles.text}>{name}</Text>
+            <Switch style={styles.switch}
+            value={active}
+            onChange={() => this.props.toggleComponent(component)}
+            />
+        </View>
+    </TouchableHighlight>
     )
   }
 
