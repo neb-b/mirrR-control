@@ -15,6 +15,7 @@ class ComponentsList extends Component {
   }
 
   _renderRow(component) {
+    console.log("row", component)
     const { name, active } = component
     return (
       <TouchableHighlight
@@ -61,7 +62,7 @@ const styles = StyleSheet.create({
     borderColor: '#d7d7d7',
   },
   text: {
-    padding: 10,
+    margin: 10,
     fontSize: 18
   },
   switch: {
