@@ -15,7 +15,8 @@ class App extends Component {
     this.state = {
       connection: false,
       ip: null,
-      loading: false
+      loading: false,
+      error: false
     }
   }
 
@@ -37,7 +38,9 @@ class App extends Component {
         }
       })
       .catch((error) => {
-        console.error(error)
+        this.setState({error: true, ip: null})
+        AsyncStorage.setItem('ip', '')
+        console.log(error)
       })
   }
 
@@ -50,7 +53,7 @@ class App extends Component {
   }
 
   connectToMirror(ip) {
-    if (this.state.ip && this.state.connection === 'wifi') {
+    if (ip && this.state.connection === 'wifi') {
       this.setState({ loading: true })
       const url = `http://${ip}:5000/components`
       fetch(url)
@@ -58,14 +61,14 @@ class App extends Component {
         .then((components) => {
           if (components && components.length) {
             AsyncStorage.setItem('ip', ip)
-            this.setState( {mirrorIp: ip, components, loading: false })
+            this.setState( { ip, components, loading: false })
           } else {
             this.setState({ ip: null, error: true, loading: false })
           }
         })
         .catch((error) => {
-          this.setState({ loading: false })
-          console.error('error', error)
+          this.setState({ loading: false, error: true, ip: null  })
+          console.log('error', error)
         })
     }
 
@@ -78,7 +81,7 @@ class App extends Component {
         : component
     })
 
-    fetch(`http://${this.state.mirrorIp}:5000/components`, {
+    fetch(`http://${this.state.ip}:5000/components`, {
       method: 'PUT',
       headers: {
         'Accept': 'application/json',
@@ -89,7 +92,9 @@ class App extends Component {
         })
       })
     .then(() => this.setState({components: newComponents}))
-    .catch((err) => console.error(err))
+    .catch((err) => {
+      console.log(err)
+    })
 
   }
 
