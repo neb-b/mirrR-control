@@ -15,7 +15,6 @@ class ComponentsList extends Component {
   }
 
   _renderRow(component) {
-    console.log("row", component)
     const { name, active } = component
     return (
       <TouchableHighlight

@@ -45,10 +45,8 @@ class App extends Component {
   }
 
   handleNetworkChange(reach) {
-    console.log('reach', reach)
     this.setState({ connection: reach })
     if (reach === 'wifi' || reach === 'WIFI' && this.state.ip) {
-      console.log("connect")
       this.connectToMirror(this.state.ip)
     }
   }
@@ -96,7 +94,6 @@ class App extends Component {
     .catch((err) => {
       console.log(err)
     })
-
   }
 
   render() {
