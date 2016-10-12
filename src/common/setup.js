@@ -23,10 +23,11 @@ class Setup extends Component {
     return (
       <View>
           <Text style={styles.heading}>Enter your{"\n"}Raspberry Pi&#39;s{"\n"}IP address</Text>
-          <View style={styles.inputWrapper}>
+          <View style={this.props.app === 'ios' ? styles.inputWrapper : styles.inputWrapper}>
             <TextInput
-              style={styles.input}
+              style={this.props.app === 'ios' ? styles.iosInput : styles.androidInput}
               keyboardType="numeric"
+              underlineColorAndroid="transparent"
               autoFocus={true}
               onChangeText={(ipText) => this.setState({ipText})}
               value={this.state.ipText}
@@ -58,7 +59,7 @@ class Setup extends Component {
     return (
       <View>
         {
-          connection && connection === 'wifi'
+          connection && connection === 'wifi' || connection === 'WIFI'
             ? this._renderConnectToIp()
             : this._renderConnectionMsg(connection)
         }
@@ -100,12 +101,21 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: '#fff',
   },
-  input: {
+  iosInput: {
     alignSelf: 'stretch',
     height: 50,
     marginTop: 5,
     fontSize: 30,
     color: '#fff'
+  },
+  androidInput: {
+    alignSelf: 'stretch',
+    height: 70,
+    marginTop: 5,
+    fontSize: 30,
+    color: '#fff',
+    borderBottomWidth: 1,
+    borderBottomColor: '#fff'
   },
   save: {
     height:45,

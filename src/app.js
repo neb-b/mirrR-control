@@ -30,7 +30,7 @@ class App extends Component {
       .then((ip) => {
         if (ip) {
           this.setState({ ip })
-          if (this.state.connection === 'wifi') {
+          if (this.state.connection === 'wifi' || this.state.connection === 'WIFI') {
             this.connectToMirror(ip)
           }
         } else {
@@ -47,13 +47,14 @@ class App extends Component {
   handleNetworkChange(reach) {
     console.log('reach', reach)
     this.setState({ connection: reach })
-    if (reach === 'wifi' && this.state.ip) {
+    if (reach === 'wifi' || reach === 'WIFI' && this.state.ip) {
+      console.log("connect")
       this.connectToMirror(this.state.ip)
     }
   }
 
   connectToMirror(ip) {
-    if (ip && this.state.connection === 'wifi') {
+    if (ip && this.state.connection === 'wifi' || this.state.connection === 'WIFI') {
       this.setState({ loading: true })
       const url = `http://${ip}:5000/components`
       fetch(url)
@@ -99,6 +100,7 @@ class App extends Component {
   }
 
   render() {
+    console.log("render", this.state)
     return (
       <View>
         {
