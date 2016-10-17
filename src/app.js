@@ -44,6 +44,12 @@ class App extends Component {
       })
   }
 
+  resetIp() {
+    console.log("reset")
+    AsyncStorage.setItem('ip', '')
+    this.setState({ ip: null, loading: false })
+  }
+
   handleNetworkChange(reach) {
     this.setState({ connection: reach })
     if (reach === 'wifi' || reach === 'WIFI' && this.state.ip) {
@@ -106,8 +112,10 @@ class App extends Component {
               components={this.state.components}
               toggleComponent={this.toggleComponent.bind(this)}/>
           : <Setup
+              error={this.state.error}
               loading={this.state.loading}
               connection={this.state.connection}
+              resetIp={this.resetIp.bind(this)}
               connectToMirror={this.connectToMirror.bind(this)}
               {...this.props}/>
         }

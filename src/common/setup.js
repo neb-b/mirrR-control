@@ -8,6 +8,7 @@ import {
 } from 'react-native'
 import Dimensions from 'Dimensions'
 import Loading from './loading'
+import cStyles from './common-styles'
 
 class Setup extends Component {
   constructor(props) {
@@ -20,26 +21,38 @@ class Setup extends Component {
   }
 
   _renderConnectToIp() {
+    const { app } = this.props
+    const ios = app === 'ios'
+    const fontBold =  ios ? cStyles.iosFontBold : ''
+    const fontSemiBold = ios ? cStyles.iosFontSemiBold : ''
     return (
       <View>
-          <Text style={styles.heading}>Enter your{"\n"}Raspberry Pi&#39;s{"\n"}IP address</Text>
-          <View style={this.props.app === 'ios' ? styles.inputWrapper : styles.inputWrapper}>
-            <TextInput
-              style={this.props.app === 'ios' ? styles.iosInput : styles.androidInput}
-              keyboardType="numeric"
-              underlineColorAndroid="transparent"
-              autoFocus={true}
-              onChangeText={(ipText) => this.setState({ipText})}
-              value={this.state.ipText}
-              />
-          </View>
-          <TouchableHighlight
-            style={styles.save}
-            underlayColor="#eeeeee"
-            onPress={() => this.props.connectToMirror(this.state.ipText)} >
-            <Text style={styles.buttonText}>Save</Text>
-          </TouchableHighlight>
+        {
+          this.props.error && (
+            <View style={styles.error}>
+              <Text style={[styles.errorMsg, fontSemiBold]}>There was a problem connecting to the mirror.</Text>
+            </View>
+          )
+
+        }
+        <Text style={[styles.heading, fontBold]}>Enter your{"\n"}Raspberry Pi&#39;s{"\n"}IP address</Text>
+        <View style={ios ? styles.inputWrapper : styles.inputWrapper}>
+          <TextInput
+            style={ios ? styles.iosInput : styles.androidInput}
+            keyboardType="numeric"
+            underlineColorAndroid="transparent"
+            autoFocus={true}
+            onChangeText={(ipText) => this.setState({ipText})}
+            value={this.state.ipText}
+            />
         </View>
+        <TouchableHighlight
+          style={[cStyles.button, cStyles.buttonInverse]}
+          underlayColor="#eeeeee"
+          onPress={() => this.props.connectToMirror(this.state.ipText)} >
+          <Text style={[cStyles.buttonText, cStyles.colorPrimary, cStyles.semiBold]}>Save</Text>
+        </TouchableHighlight>
+      </View>
     )
   }
 
@@ -68,12 +81,12 @@ class Setup extends Component {
   }
 
   render() {
-    const { connection, loading } = this.props
+    const { connection, loading, resetIp } = this.props
     return (
-      <View style={styles.container}>
+      <View style={[styles.container, cStyles.bgPrimary]}>
         {
           loading
-            ? <Loading />
+            ? <Loading resetIp={resetIp}/>
             : this._renderSetup(connection)
         }
       </View>
@@ -88,14 +101,29 @@ const styles = StyleSheet.create({
   container: {
     height,
     width,
-    backgroundColor: '#3273f4',
     padding: 50,
+  },
+  connectionMsg: {
     paddingTop: 100
   },
+  error: {
+    alignSelf: 'stretch',
+    backgroundColor: '#ffa9a1',
+    borderWidth: 2,
+    borderRadius: 7,
+    borderColor: '#df3c3c',
+    marginBottom: -55
+
+  },
+  errorMsg: {
+    padding: 10,
+    backgroundColor: 'transparent',
+    color: '#df3c3c'
+  },
   heading: {
+    marginTop: 100,
     fontSize: 36,
-    fontWeight: '900',
-    color: '#fff'
+    color: '#fff',
   },
   inputWrapper: {
     borderBottomWidth: 1,
@@ -117,22 +145,5 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: '#fff'
   },
-  save: {
-    height:45,
-    marginTop: 20,
-    padding :10,
-    backgroundColor: '#fff',
-    borderRadius: 5,
-    borderWidth: 1,
-    borderColor: '#fff'
-  },
-  buttonText: {
-    alignSelf: 'center',
-    fontSize: 20,
-    fontWeight: '800',
-    color: '#FFB11E'
-  },
-  connectionMsg: {
-    paddingTop: 100
-  }
+
 })
