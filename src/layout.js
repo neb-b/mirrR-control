@@ -7,7 +7,6 @@ import {
 } from 'react-native'
 import Dimensions from 'Dimensions'
 import ComponentsList from './common/components-list'
-import cStyles from './common/common-styles'
 
 class Layout extends Component {
   constructor(props) {
@@ -16,9 +15,9 @@ class Layout extends Component {
 
   _renderTop() {
     return (
-      <View style={[cStyles.bgPrimary, this.props.app === 'ios' ? styles.iosStatusBar : styles.androidStatusBar]}>
+      <View style={[styles.statusBar, this.props.app === 'ios' ? styles.iosStatusBar : styles.androidStatusBar]}>
         <StatusBar barStyle="light-content" />
-        <Text style={[cStyles.bgPrimary, this.props.app === 'ios' ? styles.iosStatusText : styles.androidStatusText]}>Mirror Control</Text>
+        <Text style={[styles.statusBar, this.props.app === 'ios' ? styles.iosStatusText : styles.androidStatusText]}>Mirror Control</Text>
       </View>
     )
   }
@@ -43,6 +42,9 @@ const styles = StyleSheet.create({
     flex: 1,
     width,
     height
+  },
+  statusBar: {
+    backgroundColor: '#3273f4'
   },
   iosStatusBar: {
     height: 70,
