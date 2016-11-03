@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import {
-  StyleSheet,
+  ActivityIndicator,
   View,
   Text,
-  ActivityIndicator
+  TouchableHighlight,
+  StyleSheet
 } from 'react-native';
 
-const Loading = () => {
+const Loading = ({ resetIp }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Loading components...</Text>
@@ -14,6 +15,9 @@ const Loading = () => {
         animating={true}
         size="large"
         color="#95fa2f" />
+      <TouchableHighlight onPress={resetIp}>
+        <Text style={styles.resetIp}>Reset IP</Text>
+      </TouchableHighlight>
     </View>
   )
 }
@@ -33,5 +37,11 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: '800',
     color: 'white'
+  },
+  resetIp: {
+    paddingTop: 20,
+    fontSize: 20,
+    fontWeight: '800',
+    color: '#95fa2f'
   }
 })

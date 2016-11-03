@@ -96,6 +96,11 @@ class App extends Component {
     })
   }
 
+  resetIp() {
+    this.setState({ip: null})
+    AsyncStorage.setItem('ip', '')
+  }
+
   render() {
     return (
       <View>
@@ -109,6 +114,7 @@ class App extends Component {
               loading={this.state.loading}
               connection={this.state.connection}
               connectToMirror={this.connectToMirror.bind(this)}
+              resetIp={this.resetIp.bind(this)}
               {...this.props}/>
         }
       </View>

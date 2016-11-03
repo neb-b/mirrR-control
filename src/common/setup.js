@@ -68,12 +68,12 @@ class Setup extends Component {
   }
 
   render() {
-    const { connection, loading } = this.props
+    const { connection, loading, resetIp } = this.props
     return (
       <View style={styles.container}>
         {
-          loading
-            ? <Loading />
+          !loading
+            ? <Loading resetIp={resetIp}/>
             : this._renderSetup(connection)
         }
       </View>
