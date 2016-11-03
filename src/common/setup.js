@@ -72,7 +72,7 @@ class Setup extends Component {
     return (
       <View style={styles.container}>
         {
-          !loading
+          loading
             ? <Loading resetIp={resetIp}/>
             : this._renderSetup(connection)
         }
