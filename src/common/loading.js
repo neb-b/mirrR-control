@@ -15,7 +15,9 @@ const Loading = ({ resetIp }) => {
         animating={true}
         size="large"
         color="#95fa2f" />
-      <TouchableHighlight onPress={resetIp}>
+      <TouchableHighlight
+        onPress={resetIp}
+        activeOpacity={0}>
         <Text style={styles.resetIp}>Reset IP</Text>
       </TouchableHighlight>
     </View>

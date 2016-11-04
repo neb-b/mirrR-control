@@ -7,6 +7,7 @@ import {
 } from 'react-native'
 import Layout from './layout'
 import Setup from './common/setup'
+import Loading from './common/loading'
 
 class App extends Component {
   constructor(props) {
@@ -37,10 +38,9 @@ class App extends Component {
           this.setState({ ip: null })
         }
       })
-      .catch((error) => {
+      .catch((err) => {
         this.setState({error: true, ip: null})
         AsyncStorage.setItem('ip', '')
-        console.log(error)
       })
   }
 
@@ -67,7 +67,6 @@ class App extends Component {
         })
         .catch((error) => {
           this.setState({ loading: false, error: true, ip: null  })
-          console.log('error', error)
         })
     }
 
@@ -92,12 +91,12 @@ class App extends Component {
       })
     .then(() => this.setState({components: newComponents}))
     .catch((err) => {
-      console.log(err)
+      this.setState({error: true})
     })
   }
 
   resetIp() {
-    this.setState({ip: null})
+    this.setState({loading: false})
     AsyncStorage.setItem('ip', '')
   }
 
@@ -107,9 +106,9 @@ class App extends Component {
         {
           this.state.components
           ? <Layout
-              {...this.props}
               components={this.state.components}
-              toggleComponent={this.toggleComponent.bind(this)}/>
+              toggleComponent={this.toggleComponent.bind(this)}
+              {...this.props}/>
           : <Setup
               loading={this.state.loading}
               connection={this.state.connection}
