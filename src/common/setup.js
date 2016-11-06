@@ -72,7 +72,7 @@ class Setup extends Component {
     const { connection, loading, resetIp, error } = this.props
     return (
       <View style={styles.container}>
-        {error && <ErrorMsg />}
+        {!error && <ErrorMsg />}
         {
           loading
             ? <Loading resetIp={resetIp}/>
@@ -91,7 +91,8 @@ const styles = StyleSheet.create({
     height,
     width,
     backgroundColor: '#3273f4',
-    padding: 50
+    padding: 50,
+    paddingTop: 100
   },
   heading: {
     paddingTop: 25,
