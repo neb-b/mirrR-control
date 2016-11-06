@@ -16,11 +16,11 @@
 #define TIMEOUT_SECONDS 600
 #define TEXT_TO_LOOK_FOR @"Welcome to React Native!"
 
-@interface mirror_controlTests : XCTestCase
+@interface mirrRControlTests : XCTestCase
 
 @end
 
-@implementation mirror_controlTests
+@implementation mirrRControlTests
 
 - (BOOL)findSubviewInView:(UIView *)view matching:(BOOL(^)(UIView *view))test
 {
