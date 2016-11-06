@@ -8,6 +8,7 @@ import {
 } from 'react-native'
 import Dimensions from 'Dimensions'
 import Loading from './loading'
+import ErrorMsg from './error-msg'
 
 class Setup extends Component {
   constructor(props) {
@@ -69,8 +70,10 @@ class Setup extends Component {
 
   render() {
     const { connection, loading, resetIp } = this.props
+    const error = true
     return (
       <View style={styles.container}>
+        {!error && <ErrorMsg />}
         {
           loading
             ? <Loading resetIp={resetIp}/>
@@ -89,10 +92,10 @@ const styles = StyleSheet.create({
     height,
     width,
     backgroundColor: '#3273f4',
-    padding: 50,
-    paddingTop: 100
+    padding: 50
   },
   heading: {
+    paddingTop: 25,
     fontSize: 36,
     fontWeight: '900',
     color: '#fff'

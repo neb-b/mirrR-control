@@ -114,6 +114,7 @@ class App extends Component {
               connection={this.state.connection}
               connectToMirror={this.connectToMirror.bind(this)}
               resetIp={this.resetIp.bind(this)}
+              error={this.state.error}
               {...this.props}/>
         }
       </View>
