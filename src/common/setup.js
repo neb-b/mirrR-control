@@ -69,11 +69,10 @@ class Setup extends Component {
   }
 
   render() {
-    const { connection, loading, resetIp } = this.props
-    const error = true
+    const { connection, loading, resetIp, error } = this.props
     return (
       <View style={styles.container}>
-        {!error && <ErrorMsg />}
+        {error && <ErrorMsg />}
         {
           loading
             ? <Loading resetIp={resetIp}/>

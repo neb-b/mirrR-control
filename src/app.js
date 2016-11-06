@@ -39,7 +39,7 @@ class App extends Component {
         }
       })
       .catch((err) => {
-        this.setState({error: true, ip: null})
+        this.setState({ ip: null })
         AsyncStorage.setItem('ip', '')
       })
   }
@@ -101,6 +101,7 @@ class App extends Component {
   }
 
   render() {
+    console.log("render", this.state)
     return (
       <View>
         {
