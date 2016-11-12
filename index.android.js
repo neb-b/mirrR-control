@@ -5,7 +5,7 @@ import {
 } from 'react-native';
 import App from './src/app';
 
-class mirror_control extends Component {
+class mirrr_control extends Component {
   render() {
     return (
       <View>
@@ -16,4 +16,4 @@ class mirror_control extends Component {
 }
 
 
-AppRegistry.registerComponent('mirror_control', () => mirror_control);
+AppRegistry.registerComponent('mirrr_control', () => mirrr_control);

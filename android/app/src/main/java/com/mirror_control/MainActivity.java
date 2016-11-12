@@ -1,4 +1,4 @@
-package com.mirror_control;
+package com.mirrr_control;
 
 import com.facebook.react.ReactActivity;
 
@@ -10,6 +10,6 @@ public class MainActivity extends ReactActivity {
      */
     @Override
     protected String getMainComponentName() {
-        return "mirror_control";
+        return "mirrr_control";
     }
 }

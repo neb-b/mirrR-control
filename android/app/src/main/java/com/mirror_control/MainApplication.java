@@ -1,4 +1,4 @@
-package com.mirror_control;
+package com.mirrr_control;
 
 import android.app.Application;
 import android.util.Log;
