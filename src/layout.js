@@ -15,9 +15,8 @@ class Layout extends Component {
 
   _renderTop() {
     return (
-      <View style={[styles.statusBar, this.props.app === 'ios' ? styles.iosStatusBar : styles.androidStatusBar]}>
-        <StatusBar barStyle="light-content" />
-        <Text style={[styles.statusBar, this.props.app === 'ios' ? styles.iosStatusText : styles.androidStatusText]}>Mirror Control</Text>
+      <View style={styles.statusBar}>
+        <Text style={styles.statusBarText}>Mirror Control</Text>
       </View>
     )
   }
@@ -44,29 +43,15 @@ const styles = StyleSheet.create({
     height
   },
   statusBar: {
-    backgroundColor: '#3273f4'
-  },
-  iosStatusBar: {
+    backgroundColor: '#3273f4',
     height: 70,
     marginBottom: 10
   },
-  androidStatusBar: {
-    height: 60,
-  },
-  iosStatusText: {
+  statusBarText: {
     padding: 30,
     paddingBottom: 20,
     color: '#fff',
     fontSize: 24,
     fontWeight: '500',
-  },
-  androidStatusText: {
-    paddingTop: 15,
-    paddingLeft: 30,
-    paddingBottom: 20,
-    color: '#fff',
-    fontSize: 24,
-    fontWeight: '400',
-  },
-
+  }
 })

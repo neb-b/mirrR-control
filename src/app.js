@@ -53,7 +53,7 @@ class App extends Component {
 
   connectToMirror(ip) {
     if (ip && this.state.connection === 'wifi' || this.state.connection === 'WIFI') {
-      this.setState({ loading: true })
+      this.setState({ loading: true, error: false })
       const url = `http://${ip}:5000/components`
       fetch(url)
         .then((res) => res.json())
@@ -66,7 +66,11 @@ class App extends Component {
           }
         })
         .catch((error) => {
-          this.setState({ loading: false, error: true, ip: null  })
+          this.setState({
+            loading: false,
+            error: true,
+            ip: null
+          })
         })
     }
 
@@ -101,7 +105,6 @@ class App extends Component {
   }
 
   render() {
-    console.log("render", this.state)
     return (
       <View>
         {

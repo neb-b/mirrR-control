@@ -20,13 +20,13 @@ class Setup extends Component {
     }
   }
 
-  _renderConnectToIp() {
+  _renderConnectToIp(error) {
     return (
-      <View>
+      <View style={!error ? styles.marginTop : null}>
           <Text style={styles.heading}>Enter your{"\n"}Raspberry Pi&#39;s{"\n"}IP address</Text>
-          <View style={this.props.app === 'ios' ? styles.inputWrapper : styles.inputWrapper}>
+          <View style={styles.inputWrapper}>
             <TextInput
-              style={this.props.app === 'ios' ? styles.iosInput : styles.androidInput}
+              style={styles.input}
               keyboardType="numeric"
               underlineColorAndroid="transparent"
               autoFocus={true}
@@ -47,21 +47,19 @@ class Setup extends Component {
   _renderConnectionMsg(connection) {
     return (
       <View>
-        {
-          connection
-            ? <Text style={[styles.heading, styles.connectionMsg]}>Make sure you are connected to wifi</Text>
-            : null
-        }
+          <Text style={[styles.heading, styles.connectionMsg]}>
+            Make sure you are connected to wifi
+          </Text>
       </View>
     )
   }
 
-  _renderSetup(connection) {
+  _renderSetup(connection, error) {
     return (
       <View>
         {
           connection && connection === 'wifi' || connection === 'WIFI'
-            ? this._renderConnectToIp()
+            ? this._renderConnectToIp(error)
             : this._renderConnectionMsg(connection)
         }
       </View>
@@ -69,14 +67,14 @@ class Setup extends Component {
   }
 
   render() {
-    const { connection, loading, resetIp, error } = this.props
+    const { connection, error, loading, resetIp } = this.props
     return (
       <View style={styles.container}>
         {error && <ErrorMsg />}
         {
           loading
             ? <Loading resetIp={resetIp}/>
-            : this._renderSetup(connection)
+            : this._renderSetup(connection, error)
         }
       </View>
     )
@@ -91,8 +89,10 @@ const styles = StyleSheet.create({
     height,
     width,
     backgroundColor: '#3273f4',
-    padding: 50,
-    paddingTop: 100
+    padding: 50
+  },
+  marginTop: {
+    marginTop: 50
   },
   heading: {
     paddingTop: 25,
@@ -104,21 +104,12 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: '#fff',
   },
-  iosInput: {
+  input: {
     alignSelf: 'stretch',
     height: 50,
     marginTop: 5,
     fontSize: 30,
     color: '#fff'
-  },
-  androidInput: {
-    alignSelf: 'stretch',
-    height: 70,
-    marginTop: 5,
-    fontSize: 30,
-    color: '#fff',
-    borderBottomWidth: 1,
-    borderBottomColor: '#fff'
   },
   save: {
     height:45,
