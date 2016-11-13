@@ -20,13 +20,14 @@ class Setup extends Component {
     }
   }
 
-  _renderConnectToIp(error) {
+  _renderConnectToIp(app, error) {
+    console.log("app", app)
     return (
       <View style={!error ? styles.marginTop : null}>
           <Text style={styles.heading}>Enter your{"\n"}Raspberry Pi&#39;s{"\n"}IP address</Text>
           <View style={styles.inputWrapper}>
             <TextInput
-              style={styles.input}
+              style={[styles.input, app === 'android' ? styles.androidInput : '']}
               keyboardType="numeric"
               underlineColorAndroid="transparent"
               autoFocus={true}
@@ -54,12 +55,12 @@ class Setup extends Component {
     )
   }
 
-  _renderSetup(connection, error) {
+  _renderSetup(app, connection, error) {
     return (
       <View>
         {
           connection && connection === 'wifi' || connection === 'WIFI'
-            ? this._renderConnectToIp(error)
+            ? this._renderConnectToIp(app, error)
             : this._renderConnectionMsg(connection)
         }
       </View>
@@ -67,14 +68,14 @@ class Setup extends Component {
   }
 
   render() {
-    const { connection, error, loading, resetIp } = this.props
+    const { app, connection, error, loading, resetIp } = this.props
     return (
       <View style={styles.container}>
         {error && <ErrorMsg />}
         {
           loading
             ? <Loading resetIp={resetIp}/>
-            : this._renderSetup(connection, error)
+            : this._renderSetup(app, connection, error)
         }
       </View>
     )
@@ -110,6 +111,9 @@ const styles = StyleSheet.create({
     marginTop: 5,
     fontSize: 30,
     color: '#fff'
+  },
+  androidInput: {
+    height: 60
   },
   save: {
     height:45,
