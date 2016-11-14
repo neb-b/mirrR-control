@@ -21,7 +21,6 @@ class Setup extends Component {
   }
 
   _renderConnectToIp(app, error) {
-    console.log("app", app)
     return (
       <View style={!error ? styles.marginTop : null}>
           <Text style={styles.heading}>Enter your{"\n"}Raspberry Pi&#39;s{"\n"}IP address</Text>
